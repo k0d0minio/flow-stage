@@ -1,0 +1,83 @@
+---
+alwaysApply: true
+description: Automatically analyze Linear issues from K0dominio team and create action plans
+---
+
+# Linear Issue Analysis and Action Planning
+
+## Overview
+This rule automatically fetches and analyzes Linear issues from the "K0dominio" team (team ID: e951af80-6f1d-46ed-9d9f-ea1041944ddf) that follow the "K0D-123" identifier pattern.
+
+## Workflow Process
+
+### 1. Issue Detection and Retrieval
+When a Linear issue ID is mentioned (e.g., "K0D-123"), automatically:
+- Fetch the complete issue details using the Linear API
+- Extract all relevant information including title, description, labels, assignee, status, and any attachments
+- Identify the issue type and complexity level
+
+### 2. Requirements Analysis
+For each issue, systematically analyze:
+- **Functional Requirements**: What the feature/functionality should do
+- **Technical Requirements**: Implementation details, dependencies, constraints
+- **Acceptance Criteria**: How success will be measured
+- **Dependencies**: Other issues, external services, or components required
+- **Risk Assessment**: Potential challenges or blockers
+
+### 3. Clarification Questions
+Before creating an action plan, ask targeted questions about:
+- **Ambiguous Requirements**: Any unclear or missing specifications
+- **Technical Constraints**: Performance, security, or integration requirements
+- **Timeline Expectations**: Priority level and deadline considerations
+- **Resource Requirements**: Specific skills, tools, or external dependencies needed
+- **Success Metrics**: How to measure completion and quality
+
+### 4. Action Plan Creation
+Once requirements are clarified, create a comprehensive action plan including:
+- **Task Breakdown**: Granular, actionable steps
+- **Implementation Strategy**: Technical approach and architecture decisions
+- **File Structure**: Where new files should be created or existing ones modified
+- **Dependencies**: Order of operations and prerequisite tasks
+- **Testing Strategy**: How to validate the implementation
+- **Documentation**: What needs to be documented or updated
+
+### 5. Approval Process
+- Present the complete action plan for review
+- Wait for explicit approval before beginning implementation
+- Be ready to modify the plan based on feedback
+
+## Implementation Guidelines
+
+### Code Organization
+- Follow the existing project structure in [docs/](mdc:docs/)
+- Create new documentation files as needed for complex features
+- Maintain consistency with existing patterns and conventions
+
+### Linear Integration
+- Always reference the original Linear issue ID in commits and documentation
+- Update issue status and add comments as work progresses
+- Link any created files or documentation back to the Linear issue
+
+### Quality Assurance
+- Break down complex tasks into smaller, testable units
+- Include error handling and edge cases in the implementation plan
+- Consider both happy path and error scenarios
+
+## Automatic Trigger
+**This rule automatically activates when you see any text matching the pattern "K0D-" followed by numbers (e.g., "K0D-123", "K0D-456", etc.)**
+
+When detected, automatically:
+1. Fetch the issue details from Linear
+2. Analyze requirements comprehensively
+3. Ask targeted clarifying questions
+4. Create a detailed action plan
+5. Wait for explicit approval before proceeding
+
+## Example Usage
+Simply type "K0D-123" and the system will automatically:
+- Fetch the complete issue details
+- Analyze all requirements and dependencies
+- Ask clarifying questions about any ambiguities
+- Present a comprehensive action plan for approval
+
+This ensures consistent, thorough analysis of all Linear issues and prevents work from starting without proper planning and approval.
