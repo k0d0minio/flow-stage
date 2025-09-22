@@ -127,7 +127,7 @@ export default function Home() {
       <footer className="border-t bg-white/90 dark:bg-slate-900/90 backdrop-blur-sm mt-16">
         <div className="container mx-auto px-4 py-8">
           <div className="text-center text-muted-foreground">
-            <p>&copy; 2024 Flow Stage. All rights reserved.</p>
+            <p>&copy; {new Date().getFullYear()} Flow Stage. All rights reserved.</p>
           </div>
         </div>
       </footer>
