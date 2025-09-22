@@ -5,9 +5,9 @@ import { Music, MapPin, Users, Calendar } from "lucide-react";
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-slate-100 dark:from-slate-900 dark:to-slate-800">
+    <div className="min-h-screen bg-gray-50">
       {/* Header */}
-      <header className="border-b bg-white/90 dark:bg-slate-900/90 backdrop-blur-sm">
+      <header className="border-b bg-white shadow-sm">
         <div className="container mx-auto px-4 py-6">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-2">
@@ -102,7 +102,7 @@ export default function Home() {
         </div>
 
         {/* CTA Section */}
-        <Card className="bg-gradient-to-r from-primary to-purple-600 text-white border-0">
+        <Card className="bg-primary text-white border-0">
           <CardContent className="p-12 text-center">
             <h3 className="text-3xl font-bold mb-4">
               Ready to transform your touring?
@@ -124,7 +124,7 @@ export default function Home() {
       </main>
 
       {/* Footer */}
-      <footer className="border-t bg-white/90 dark:bg-slate-900/90 backdrop-blur-sm mt-16">
+      <footer className="border-t bg-white mt-16">
         <div className="container mx-auto px-4 py-8">
           <div className="text-center text-muted-foreground">
             <p>&copy; {new Date().getFullYear()} Flow Stage. All rights reserved.</p>
