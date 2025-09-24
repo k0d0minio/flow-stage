@@ -10,12 +10,12 @@ export default function Home() {
             Revolutionary B2B SaaS platform automating the entire music touring value chain
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <button className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-8 rounded-lg transition-colors">
+            <a href="/auth/signup" className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-8 rounded-lg transition-colors text-center">
               Get Started
-            </button>
-            <button className="border border-gray-300 hover:border-gray-400 text-gray-700 font-semibold py-3 px-8 rounded-lg transition-colors">
-              Learn More
-            </button>
+            </a>
+            <a href="/auth/signin" className="border border-gray-300 hover:border-gray-400 text-gray-700 font-semibold py-3 px-8 rounded-lg transition-colors text-center">
+              Sign In
+            </a>
           </div>
         </div>
         

@@ -18,7 +18,12 @@
     "workflowPreferences": {
       "batchSimilarWork": false,
       "securityFirstApproach": true,
-      "testDrivenDevelopment": false
+      "testDrivenDevelopment": false,
+      "verificationRequired": true
+    },
+    "criticalRules": {
+      "neverMarkCompleteWithoutVerification": "User must confirm functionality works before marking tickets as completed",
+      "alwaysTestImplementation": "Test all implementations before claiming completion"
     }
   },
   "insights": {

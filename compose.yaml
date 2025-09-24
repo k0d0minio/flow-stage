@@ -18,6 +18,13 @@ services:
     volumes:
       - ./:/app
       - /app/node_modules
+    environment:
+      - NEXT_PUBLIC_SUPABASE_URL=https://blpacprmeaafbaibkdfy.supabase.co
+      - NEXT_PUBLIC_SUPABASE_ANON_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJscGFjcHJtZWFhZmJhaWJrZGZ5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTg3MTE1NTIsImV4cCI6MjA3NDI4NzU1Mn0.MaSmGfAks1ODkBvPlwmcxO7Gnj1c78Ym9kcOTJcl7iQ
+      - SUPABASE_SERVICE_ROLE_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJscGFjcHJtZWFhZmJhaWJrZGZ5Iiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc1ODcxMTU1MiwiZXhwIjoyMDc0Mjg3NTUyfQ.FRa1vAQ9eJMFKKcZ06yfOisc6JsVUUPYgILyZ1wiTFM
+      - NEXTAUTH_SECRET=your_nextauth_secret_here
+      - NEXTAUTH_URL=https://flow-stage.localtest.me
+      - NODE_ENV=development
     <<: *shared-networks
 
 networks:
