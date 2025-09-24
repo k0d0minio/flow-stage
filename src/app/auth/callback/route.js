@@ -4,7 +4,8 @@ import { NextResponse } from 'next/server'
 export async function GET(request) {
   const { searchParams, origin } = new URL(request.url)
   const code = searchParams.get('code')
-  const next = searchParams.get('next') ?? '/dashboard'
+  const type = searchParams.get('type')
+  const next = searchParams.get('next') ?? '/auth/profile-setup'
 
   if (code) {
     const supabase = createServerClient(
@@ -22,9 +23,16 @@ export async function GET(request) {
       }
     )
 
-    const { error } = await supabase.auth.exchangeCodeForSession(code)
-    if (!error) {
-      return NextResponse.redirect(`${origin}${next}`)
+    const { data, error } = await supabase.auth.exchangeCodeForSession(code)
+    
+    if (!error && data.user) {
+      // Check if this is an email confirmation
+      if (type === 'signup' || type === 'recovery') {
+        return NextResponse.redirect(`${origin}/auth/profile-setup`)
+      }
+      
+      // For other auth flows, redirect to dashboard
+      return NextResponse.redirect(`${origin}/dashboard`)
     }
   }
 

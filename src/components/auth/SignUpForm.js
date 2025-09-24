@@ -27,10 +27,6 @@ export default function SignUpForm() {
       setError(error.message)
     } else {
       setMessage('Check your email for the confirmation link!')
-      // Redirect to profile setup after successful signup
-      setTimeout(() => {
-        router.push('/auth/profile-setup')
-      }, 2000)
     }
 
     setLoading(false)

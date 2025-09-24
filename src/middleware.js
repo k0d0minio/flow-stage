@@ -36,6 +36,7 @@ export async function middleware(request) {
   // Protected routes
   const protectedRoutes = ['/dashboard', '/profile', '/settings']
   const authRoutes = ['/auth/signin', '/auth/signup', '/auth/forgot-password']
+  const profileSetupRoute = '/auth/profile-setup'
 
   const isProtectedRoute = protectedRoutes.some(route => 
     request.nextUrl.pathname.startsWith(route)
@@ -43,14 +44,15 @@ export async function middleware(request) {
   const isAuthRoute = authRoutes.some(route => 
     request.nextUrl.pathname.startsWith(route)
   )
+  const isProfileSetupRoute = request.nextUrl.pathname.startsWith(profileSetupRoute)
 
   // Redirect unauthenticated users from protected routes
-  if (isProtectedRoute && !user) {
+  if ((isProtectedRoute || isProfileSetupRoute) && !user) {
     return NextResponse.redirect(new URL('/auth/signin', request.url))
   }
 
-  // Redirect authenticated users from auth routes
-  if (isAuthRoute && user) {
+  // Redirect authenticated users from auth routes (but allow profile-setup)
+  if (isAuthRoute && user && !isProfileSetupRoute) {
     return NextResponse.redirect(new URL('/dashboard', request.url))
   }
 
