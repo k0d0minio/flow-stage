@@ -23,7 +23,9 @@
     },
     "criticalRules": {
       "neverMarkCompleteWithoutVerification": "User must confirm functionality works before marking tickets as completed",
-      "alwaysTestImplementation": "Test all implementations before claiming completion"
+      "alwaysTestImplementation": "Test all implementations before claiming completion",
+      "alwaysCheckESLintErrors": "Always run linting checks before marking work complete - avoid unescaped entities and other common ESLint errors",
+      "preventCommonErrors": "Avoid apostrophes in JSX text, use proper escaping or &apos; entity"
     }
   },
   "insights": {

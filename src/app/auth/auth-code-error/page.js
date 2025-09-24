@@ -49,7 +49,7 @@ export default function AuthCodeErrorPage() {
                 </div>
                 <div className="ml-3">
                   <p className="text-sm text-gray-700">
-                    <strong>Request a new confirmation email</strong> if you haven't received one
+                    <strong>Request a new confirmation email</strong> if you haven&apos;t received one
                   </p>
                 </div>
               </div>
