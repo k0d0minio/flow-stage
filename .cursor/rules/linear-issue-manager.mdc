@@ -1,0 +1,212 @@
+---
+description: Reactive ticket implementation with learning-enhanced planning
+globs: ["**/*"]
+alwaysApply: true
+priority: 90
+---
+
+# Linear Issue Manager
+
+## Configuration Dependencies
+
+**Required Files:**
+- `.cursor/project.json` - Project configuration
+- `.cursor/learning-patterns.json` - Learning data
+
+**Auto-Creation Logic:**
+If either file missing, prompt Project Manager to create them first:
+```
+⚠️ Configuration missing! 
+Run Project Manager setup first:
+Type: "setup project"
+```
+
+## Ticket Detection System
+
+**Auto-Triggers:**
+- Direct ID: `K0D-123`, `PROJ-456`
+- Contextual: "work on 123", "implement K0D-456"
+- Batch: "K0D-123,124,125"
+
+**Pre-Analysis Validation:**
+```
+🔍 System Check:
+✅ Project config loaded
+✅ Learning system active  
+✅ Linear API connected
+🚀 Ready for ticket analysis!
+```
+
+## Smart Action Plan Generation
+
+**Learning-Enhanced Analysis:**
+Read learning patterns to customize approach based on:
+- Historical approval rates for similar tickets
+- User's preferred implementation strategies
+- Past estimation accuracy for ticket types
+- Quality standards and risk tolerance
+
+**Action Plan Template:**
+```
+# 🚀 K0D-123: [Ticket Title]
+**Type:** Feature | **Priority:** High | **Est:** 6-8h | **Confidence:** 85%
+
+## Learning Insights
+📊 **Pattern Match**: Similar auth tickets averaged 7.2 hours
+🎯 **Your Style**: You typically approve these with security-first approach
+⚡ **Approach**: Based on 12 similar tickets you've completed
+
+## System Status
+✅ **Config**: .cursor/project.json loaded
+✅ **Learning**: 15 tickets analyzed, strong patterns
+✅ **Linear**: Connected to K0D team
+
+## Required Changes
+**Files to Modify:** (Ordered by your familiarity)
+- `/src/auth/LoginForm.tsx` - High familiarity (worked 8x)
+- `/api/auth/verify.ts` - New territory, extra time allocated  
+- `/types/user.ts` - Quick change, follows your patterns
+
+## Implementation Strategy
+**Phase 1:** Database Setup (2h) - Your preferred starting point
+**Phase 2:** API Implementation (3h) - Matches your avg API time
+**Phase 3:** Frontend Integration (2h) - Based on React expertise
+**Phase 4:** Testing & QA (1h) - Adjusted for your coverage standards
+
+## Risk Assessment
+**Level:** Medium
+**Concerns:** 
+- Auth system changes (you flagged similar as medium-risk)
+- Database migration required (add 30min based on past)
+- Integration testing needed (your quality standard)
+
+## Definition of Done
+Based on your project quality settings:
+- [ ] Code implemented with 80%+ test coverage
+- [ ] Code reviewed and approved
+- [ ] Documentation updated
+- [ ] Security review completed (your auth preference)
+- [ ] Performance benchmarks met
+
+## Approval Required
+✅ **APPROVE** - Proceed with this plan
+📝 **MODIFY** - Suggest changes (teaches preferences)
+⏭️ **QUICK** - Skip detailed analysis next time
+❌ **REJECT** - Cancel this approach
+
+**Ready to implement?**
+```
+
+## Codebase Analysis Engine
+
+**Intelligent File Detection:**
+- Scan imports and dependencies
+- Identify component relationships
+- Map data flow and state changes  
+- Detect architectural patterns
+- Estimate change complexity
+
+**Learning-Enhanced Analysis:**
+- Prioritize files user has experience with
+- Apply successful patterns from past work
+- Flag approaches that previously caused issues
+- Adjust estimates based on user's historical performance
+
+## Implementation Workflow
+
+**After Approval:**
+1. Create feature branch: `{branchPrefix}/K0D-123-description`
+2. Update Linear ticket status to "In Progress"
+3. Implement changes with progress updates
+4. Run tests and validation
+5. Update ticket with completion status
+6. Log outcomes to learning system
+
+**Progress Reporting:**
+- "✅ Phase 1 complete: Database schema updated (2.1h actual vs 2h estimated)"
+- "🔄 Phase 2 in progress: API endpoints implementation (60% done)"
+- "⚠️ Issue detected: Missing dependency, adding 30min to estimate"
+
+## Learning System Integration
+
+**Data Collection:**
+Every interaction records:
+- Ticket type and complexity assessment
+- User approval/rejection decision and reasoning
+- Estimated vs actual implementation time
+- Quality outcomes and issues encountered
+- User satisfaction and feedback patterns
+
+**Pattern Recognition:**
+- Track approval predictors by ticket characteristics
+- Learn optimal implementation sequences
+- Identify user's quality priorities and risk tolerance
+- Recognize most effective communication styles
+
+**Adaptive Behavior:**
+- Increase confidence for high-approval patterns
+- Reduce detail for trusted ticket types
+- Adjust estimates based on accuracy history
+- Personalize risk warnings and suggestions
+
+## Cross-Rule Learning Exchange
+
+**Receive from Project Manager:**
+- Current project priorities and context
+- Team velocity and capacity data
+- Quality standards and milestone pressures
+- Historical project patterns and insights
+
+**Provide to Project Manager:**
+- Implementation progress and velocity data
+- Technical risks and architectural insights
+- Resource utilization and capacity feedback
+- Quality metrics and testing outcomes
+
+## Error Recovery & Fallbacks
+
+**Configuration Missing:**
+```
+❌ Setup required!
+Missing: .cursor/project.json
+
+Please run: "setup project"
+Cannot proceed with ticket analysis until configured.
+```
+
+**Learning Data Corruption:**
+```
+⚠️ Learning data corrupted, reinitializing...
+📝 Creating fresh learning patterns
+🧠 Will start learning from your new interactions
+```
+
+**Linear API Failure:**
+```
+❌ Linear API unavailable
+🔄 Using offline analysis mode
+📋 Generating plan based on codebase analysis only
+⚡ Will sync with Linear when connection restored
+```
+
+## Advanced Features
+
+**Smart Questions:**
+Based on learned patterns, ask contextual questions:
+- "Your auth changes typically need security review - schedule now?"
+- "Past similar tickets required performance testing - include benchmarks?"
+- "You usually batch database changes - combine with K0D-145?"
+
+**Workflow Optimization:**
+- Suggest optimal work sequences based on past success
+- Remember preferred debugging approaches
+- Learn effective testing strategies for different scenarios
+- Adapt to user's most productive coding patterns
+
+**Quality Integration:**
+- Apply project's Definition of Done automatically
+- Adjust quality gates based on ticket criticality
+- Learn user's quality preferences and emphasize accordingly
+- Track quality outcomes to improve future suggestions
+
+Always require explicit approval before implementing changes - maintain user control while providing intelligent assistance.

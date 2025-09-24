@@ -1,136 +1,39 @@
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Music, MapPin, Users, Calendar } from "lucide-react";
-
 export default function Home() {
   return (
-    <div className="min-h-screen bg-gray-50">
-      {/* Header */}
-      <header className="border-b bg-white shadow-sm">
-        <div className="container mx-auto px-4 py-6">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-2">
-              <Music className="h-8 w-8 text-primary" />
-              <h1 className="text-2xl font-bold text-foreground">Flow Stage</h1>
-            </div>
-            <div className="flex items-center space-x-4">
-              <Button variant="outline">Sign In</Button>
-              <Button>Get Started</Button>
-            </div>
-          </div>
-        </div>
-      </header>
-
-      {/* Hero Section */}
-      <main className="container mx-auto px-4 py-16">
-        <div className="text-center mb-16">
-          <h2 className="text-5xl font-bold text-foreground mb-6">
-            Revolutionize Musical Touring
-          </h2>
-          <p className="text-xl text-muted-foreground mb-8 max-w-3xl mx-auto">
-            B2B SaaS platform that automates the entire musical touring value chain, 
-            from artist-venue matching to complete tour management.
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
+      <div className="container mx-auto px-4 py-16">
+        <div className="text-center">
+          <h1 className="text-6xl font-bold text-gray-900 mb-6">
+            🎵 Flow Stage
+          </h1>
+          <p className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
+            Revolutionary B2B SaaS platform automating the entire music touring value chain
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button size="lg" className="text-lg px-8 py-6">
-              Get Started Free
-            </Button>
-            <Button variant="outline" size="lg" className="text-lg px-8 py-6">
-              View Demo
-            </Button>
+            <button className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-8 rounded-lg transition-colors">
+              Get Started
+            </button>
+            <button className="border border-gray-300 hover:border-gray-400 text-gray-700 font-semibold py-3 px-8 rounded-lg transition-colors">
+              Learn More
+            </button>
           </div>
         </div>
-
-        {/* Features Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
-          <Card className="text-center p-6">
-            <CardHeader>
-              <div className="mx-auto mb-4 p-3 bg-primary/10 rounded-full w-fit">
-                <Music className="h-6 w-6 text-primary" />
-              </div>
-              <CardTitle className="text-lg">Smart Matching</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <CardDescription>
-                Intelligent algorithm to match artists and venues in 3 clicks
-              </CardDescription>
-            </CardContent>
-          </Card>
-
-          <Card className="text-center p-6">
-            <CardHeader>
-              <div className="mx-auto mb-4 p-3 bg-primary/10 rounded-full w-fit">
-                <MapPin className="h-6 w-6 text-primary" />
-              </div>
-              <CardTitle className="text-lg">Geographic Optimization</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <CardDescription>
-                Reduce your transport costs by 30-40% with our optimization
-              </CardDescription>
-            </CardContent>
-          </Card>
-
-          <Card className="text-center p-6">
-            <CardHeader>
-              <div className="mx-auto mb-4 p-3 bg-primary/10 rounded-full w-fit">
-                <Users className="h-6 w-6 text-primary" />
-              </div>
-              <CardTitle className="text-lg">Technical Teams</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <CardDescription>
-                Intelligent matching of technicians based on skills and geolocation
-              </CardDescription>
-            </CardContent>
-          </Card>
-
-          <Card className="text-center p-6">
-            <CardHeader>
-              <div className="mx-auto mb-4 p-3 bg-primary/10 rounded-full w-fit">
-                <Calendar className="h-6 w-6 text-primary" />
-              </div>
-              <CardTitle className="text-lg">Automated Contracts</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <CardDescription>
-                Automatic contract generation with integrated e-signature
-              </CardDescription>
-            </CardContent>
-          </Card>
-        </div>
-
-        {/* CTA Section */}
-        <Card className="bg-primary text-white border-0">
-          <CardContent className="p-12 text-center">
-            <h3 className="text-3xl font-bold mb-4">
-              Ready to transform your touring?
-            </h3>
-            <p className="text-xl mb-8 opacity-90">
-              Join the first users of Flow Stage
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center max-w-md mx-auto">
-              <Input 
-                placeholder="Your professional email" 
-                className="bg-white/20 border-white/30 text-white placeholder:text-white/70"
-              />
-              <Button variant="secondary" size="lg">
-                Sign Up
-              </Button>
-            </div>
-          </CardContent>
-        </Card>
-      </main>
-
-      {/* Footer */}
-      <footer className="border-t bg-white mt-16">
-        <div className="container mx-auto px-4 py-8">
-          <div className="text-center text-muted-foreground">
-            <p>&copy; {new Date().getFullYear()} Flow Stage. All rights reserved.</p>
+        
+        <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="bg-white p-6 rounded-lg shadow-md">
+            <h3 className="text-xl font-semibold mb-3">🎭 For Artists</h3>
+            <p className="text-gray-600">Find the perfect venue for your music in 3 clicks</p>
+          </div>
+          <div className="bg-white p-6 rounded-lg shadow-md">
+            <h3 className="text-xl font-semibold mb-3">🏢 For Venues</h3>
+            <p className="text-gray-600">Fill your calendar with the right artists automatically</p>
+          </div>
+          <div className="bg-white p-6 rounded-lg shadow-md">
+            <h3 className="text-xl font-semibold mb-3">📋 For Bookers</h3>
+            <p className="text-gray-600">Manage multiple artists with AI tour optimization</p>
           </div>
         </div>
-      </footer>
+      </div>
     </div>
-  );
+  )
 }

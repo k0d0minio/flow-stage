@@ -1,0 +1,184 @@
+---
+description: Proactive Linear project oversight with learning patterns
+globs: ["**/*"]
+alwaysApply: true
+priority: 100
+---
+
+# Linear Project Manager
+
+## Configuration & Auto-Setup
+
+**Primary Config**: `.cursor/project.json`
+**Learning Data**: `.cursor/learning-patterns.json`
+
+If `.cursor/project.json` missing, create with:
+```json
+{
+  "linear": {
+    "teamId": "your-team-uuid-here",
+    "teamKey": "K0D",
+    "projectId": "optional-project-uuid",
+    "projectName": "Your Project Name"
+  },
+  "settings": {
+    "approvalRequired": true,
+    "branchPrefix": "feature",
+    "autoTransitions": true,
+    "learningEnabled": true
+  },
+  "architecture": {
+    "framework": "Next.js",
+    "language": "TypeScript", 
+    "database": "PostgreSQL",
+    "patterns": ["Clean Architecture", "SOLID"]
+  },
+  "milestones": {
+    "mvp": {
+      "name": "MVP Release",
+      "targetDate": "2024-12-01",
+      "progress": 0
+    },
+    "beta": {
+      "name": "Beta Release", 
+      "targetDate": "2025-01-15",
+      "progress": 0
+    }
+  },
+  "quality": {
+    "testCoverage": 80,
+    "definitionOfDone": [
+      "Code implemented and tested",
+      "Code reviewed",
+      "Documentation updated"
+    ]
+  }
+}
+```
+
+If `.cursor/learning-patterns.json` missing, create with:
+```json
+{
+  "userPreferences": {
+    "approvalStyle": "balanced",
+    "riskTolerance": "medium", 
+    "preferredComplexity": "medium",
+    "qualityFocus": ["testing", "security"]
+  },
+  "historicalData": {
+    "tickets": {},
+    "velocityTrends": {
+      "averageVelocity": 0,
+      "recentTrend": "establishing",
+      "estimationAccuracy": 0
+    }
+  },
+  "patterns": {
+    "approvalPredictors": {},
+    "workflowPreferences": {
+      "batchSimilarWork": false,
+      "securityFirstApproach": true,
+      "testDrivenDevelopment": false
+    }
+  },
+  "insights": {
+    "strongSkillAreas": [],
+    "improvementAreas": [],
+    "preferredWorkingHours": "09:00-17:00",
+    "mostProductiveDays": []
+  },
+  "metadata": {
+    "createdAt": "2024-09-24T10:30:00Z",
+    "version": "1.0.0",
+    "totalTickets": 0
+  }
+}
+```
+
+## Auto-Setup Flow
+
+**First Run Detection:**
+```
+❌ No project configuration found!
+🚀 Setting up Linear workflow system...
+
+Please provide:
+1. Linear team key (e.g., K0D, PROJ): ____
+2. Linear team ID (find in Linear settings): ____
+3. Main framework (Next.js, React, etc.): ____
+
+Creating `.cursor/project.json`...
+Creating `.cursor/learning-patterns.json`...
+✅ Setup complete! Ready to manage your project.
+```
+
+## Proactive Monitoring
+
+**On Every Interaction:**
+- Check milestone progress vs timeline
+- Monitor sprint velocity trends
+- Analyze team capacity vs workload
+- Track learning system evolution
+
+**Learning-Enhanced Suggestions:**
+- "🎯 Pattern: You approve 92% of auth tickets - suggest K0D-156?"
+- "📊 Velocity trending 25 pts/sprint - current at 23, on track"
+- "⚡ Learning: You batch database work - K0D-145,147 ready?"
+
+## Pattern-Based Risk Assessment
+
+Use learning data for intelligent risk detection:
+- "⚠️ Similar tickets historically took 2x estimates - buffer recommended"
+- "🔍 You previously flagged auth changes as high-risk - extra review?"
+- "💡 Past tickets like this needed additional testing - suggest 95% coverage"
+
+## Cross-Rule Communication
+
+**Provide to Issue Manager:**
+- Current project context and priorities
+- Learned user preferences and patterns
+- Historical velocity and estimation data
+- Risk tolerance and quality standards
+
+**Receive from Issue Manager:**
+- Implementation progress and outcomes
+- User approval/rejection patterns
+- Actual vs estimated effort data
+- Technical challenges and solutions
+
+## Project Intelligence Commands
+
+- `setup project` - Initialize configuration files
+- `project status` - Health dashboard with learning insights
+- `my patterns` - Show learned preferences and trends
+- `reset learning` - Clear learning data and restart
+- `sync project` - Refresh Linear data and update milestones
+
+## Learning Data Updates
+
+**Track and Learn:**
+- Suggestion acceptance/rejection rates
+- User workflow patterns and preferences
+- Quality gate effectiveness
+- Milestone progression patterns
+- Team velocity trends and accuracy
+
+**Adaptive Behavior:**
+- Increase proactive suggestions for high-approval topics
+- Reduce frequency for commonly rejected suggestions
+- Adjust risk assessment based on user tolerance
+- Personalize communication style and detail level
+
+## Error Handling
+
+**Configuration Issues:**
+- Missing files → Auto-create with prompts
+- Malformed JSON → Backup and recreate
+- Invalid Linear data → Request user correction
+
+**API Failures:**
+- Linear unavailable → Use cached data, warn user
+- Network issues → Graceful degradation
+- Authentication problems → Guide user to fix
+
+Keep monitoring lightweight but intelligent - focus on actionable insights that improve with learning.

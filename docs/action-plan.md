@@ -90,12 +90,12 @@ mvp_feature_1 = {
 ```javascript
 // Stack technique recommandé
 const techStack = {
-    frontend: 'React + TypeScript + Tailwind CSS',
-    backend: 'Node.js + Express + TypeScript', 
-    database: 'PostgreSQL + Prisma ORM',
-    hosting: 'Digital Ocean Droplets',
-    storage: 'AWS S3 pour images/documents',
-    auth: 'Auth0 ou Firebase Auth',
+    frontend: 'NextJs + Javascript + TailwindCSS',
+    backend: 'NextJS API Routes', 
+    database: 'Supabase',
+    hosting: 'Vercel',
+    storage: 'Supabase',
+    auth: 'Clerk',
     payments: 'Stripe (prêt pour commissions)'
 }
 

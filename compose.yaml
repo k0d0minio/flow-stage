@@ -1,0 +1,25 @@
+x-shared-networks: &shared-networks
+  networks:
+    - config
+
+services:
+  flow-stage:
+    container_name: flow-stage
+    build:
+      context: .
+      target: development
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.flow-stage.rule=Host(`flow-stage.localtest.me`)"
+      - "traefik.http.routers.flow-stage.entrypoints=websecure"
+      - "traefik.http.routers.flow-stage.tls=true"
+      - "traefik.http.routers.flow-stage.tls.certresolver=myresolver"
+      - "traefik.http.services.flow-stage.loadbalancer.server.port=3000"
+    volumes:
+      - ./:/app
+      - /app/node_modules
+    <<: *shared-networks
+
+networks:
+  config:
+    external: true

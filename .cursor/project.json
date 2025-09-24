@@ -1,0 +1,40 @@
+{
+  "linear": {
+    "teamId": "e951af80-6f1d-46ed-9d9f-ea1041944ddf",
+    "teamKey": "K0D",
+    "projectId": "42b1d4f8-861d-4a72-80db-2fdae7ea365e",
+    "projectName": "Flow Stage - Music Booking Platform"
+  },
+  "settings": {
+    "approvalRequired": true,
+    "branchPrefix": "feature",
+    "autoTransitions": true,
+    "learningEnabled": true
+  },
+  "architecture": {
+    "framework": "Next.js",
+    "language": "Javascript", 
+    "database": "PostgreSQL",
+    "patterns": ["Clean Architecture", "SOLID"]
+  },
+  "milestones": {
+    "mvp": {
+      "name": "MVP Release",
+      "targetDate": "2024-12-01",
+      "progress": 0
+    },
+    "beta": {
+      "name": "Beta Release", 
+      "targetDate": "2025-01-15",
+      "progress": 0
+    }
+  },
+  "quality": {
+    "testCoverage": 80,
+    "definitionOfDone": [
+      "Code implemented and tested",
+      "Code reviewed",
+      "Documentation updated"
+    ]
+  }
+}
