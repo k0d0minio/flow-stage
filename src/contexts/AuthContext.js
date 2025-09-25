@@ -2,6 +2,7 @@
 
 import { createContext, useContext, useEffect, useState } from 'react'
 import { supabase } from '@/lib/supabase/client'
+import { generatePKCEParams } from '@/lib/pkce'
 
 const AuthContext = createContext({})
 
@@ -41,11 +42,15 @@ export const AuthProvider = ({ children }) => {
 
   const signUp = async (email, password) => {
     try {
+      // Generate PKCE parameters
+      const { codeChallenge } = await generatePKCEParams()
+      
       const { data, error } = await supabase.auth.signUp({
         email,
         password,
         options: {
-          emailRedirectTo: `${window.location.origin}/auth/callback`
+          emailRedirectTo: `${window.location.origin}/auth/callback`,
+          codeChallenge
         }
       })
 

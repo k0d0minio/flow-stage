@@ -66,7 +66,25 @@ function CallbackContent() {
         else if (code) {
           console.log('🔍 PKCE flow detected')
           
-          const { data, error } = await supabase.auth.exchangeCodeForSession(code)
+          // Get the stored code verifier from cookies
+          const getCookie = (name) => {
+            const value = `; ${document.cookie}`
+            const parts = value.split(`; ${name}=`)
+            if (parts.length === 2) return parts.pop().split(';').shift()
+            return null
+          }
+          
+          const codeVerifier = getCookie('sb-code-verifier')
+          
+          if (!codeVerifier) {
+            console.error('❌ No code verifier found in cookies')
+            router.push('/auth/auth-code-error')
+            return
+          }
+          
+          console.log('🔍 Found code verifier:', !!codeVerifier)
+          
+          const { data, error } = await supabase.auth.exchangeCodeForSession(code, codeVerifier)
           
           if (error) {
             console.error('❌ Error exchanging code:', error)
@@ -75,6 +93,9 @@ function CallbackContent() {
           }
 
           console.log('✅ Code exchanged successfully:', data.user?.id)
+          
+          // Clear the code verifier cookie
+          document.cookie = 'sb-code-verifier=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT'
 
           // Redirect based on type
           if (type === 'signup') {
