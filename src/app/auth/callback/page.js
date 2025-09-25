@@ -126,6 +126,13 @@ function CallbackContent() {
           }
           
           // For PKCE flow, use exchangeCodeForSession with code verifier
+          console.log('🔍 About to call exchangeCodeForSession with:', {
+            code: code,
+            codeVerifier: codeVerifier,
+            codeLength: code?.length,
+            verifierLength: codeVerifier?.length
+          })
+          
           const { data, error } = await supabase.auth.exchangeCodeForSession(code, codeVerifier)
           
           if (error) {
