@@ -2,6 +2,9 @@
 const nextConfig = {
   // Enable HTTPS support for local development
   
+  // Allow cross-origin requests from localtest.me domain
+  allowedDevOrigins: ['flow-stage.localtest.me'],
+  
   // Configure for HTTPS and custom domain
   async headers() {
     return [

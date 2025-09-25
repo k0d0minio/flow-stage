@@ -1,6 +1,18 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { AuthProvider } from "@/contexts/AuthContext";
+import { validateConfig } from "@/lib/config";
+
+// Validate configuration on app startup
+try {
+  validateConfig();
+} catch (error) {
+  console.error('Configuration validation failed:', error.message);
+  // In production, you might want to throw this error to prevent app startup
+  if (process.env.NODE_ENV === 'production') {
+    throw error;
+  }
+}
 
 const geistSans = Geist({
   variable: "--font-geist-sans",

@@ -46,6 +46,13 @@ Read learning patterns to customize approach based on:
 - Past estimation accuracy for ticket types
 - Quality standards and risk tolerance
 
+**Project Scoping:**
+Always read `.cursor/project.json` to get:
+- `linear.projectId` - Use for filtering all Linear API calls
+- `linear.teamId` - Use for team-specific operations
+- `linear.teamKey` - Use for ticket ID validation
+- `linear.projectName` - Use for context in descriptions
+
 **Action Plan Template:**
 ```
 # 🚀 K0D-123: [Ticket Title]
@@ -116,11 +123,18 @@ Based on your project quality settings:
 
 **After Approval:**
 1. Create feature branch: `{branchPrefix}/K0D-123-description`
-2. Update Linear ticket status to "In Progress"
+2. Update Linear ticket status to "In Progress" (using project-scoped API calls)
 3. Implement changes with progress updates
 4. Run tests and validation
-5. Update ticket with completion status
+5. Update ticket with completion status (using project-scoped API calls)
 6. Log outcomes to learning system
+
+**Linear API Scoping Requirements:**
+- All `mcp_linear_list_issues` calls MUST include `project: "{projectId}"` parameter
+- All `mcp_linear_get_issue` calls should validate ticket belongs to current project
+- All `mcp_linear_create_issue` calls MUST include `project: "{projectId}"` parameter
+- All `mcp_linear_update_issue` calls should validate ticket belongs to current project
+- Read `linear.projectId` from `.cursor/project.json` for all Linear operations
 
 **Progress Reporting:**
 - "✅ Phase 1 complete: Database schema updated (2.1h actual vs 2h estimated)"
@@ -187,6 +201,15 @@ Cannot proceed with ticket analysis until configured.
 🔄 Using offline analysis mode
 📋 Generating plan based on codebase analysis only
 ⚡ Will sync with Linear when connection restored
+```
+
+**Project Configuration Missing:**
+```
+❌ Project configuration incomplete!
+Missing: linear.projectId in .cursor/project.json
+
+Cannot scope Linear operations without project ID.
+Please ensure .cursor/project.json contains valid linear.projectId
 ```
 
 ## Advanced Features

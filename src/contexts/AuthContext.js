@@ -15,7 +15,6 @@ export const useAuth = () => {
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null)
-  const [profile, setProfile] = useState(null)
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
@@ -23,11 +22,6 @@ export const AuthProvider = ({ children }) => {
     const getInitialSession = async () => {
       const { data: { session } } = await supabase.auth.getSession()
       setUser(session?.user ?? null)
-      
-      if (session?.user) {
-        await fetchProfile(session.user.id)
-      }
-      
       setLoading(false)
     }
 
@@ -37,13 +31,6 @@ export const AuthProvider = ({ children }) => {
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
       async (event, session) => {
         setUser(session?.user ?? null)
-        
-        if (session?.user) {
-          await fetchProfile(session.user.id)
-        } else {
-          setProfile(null)
-        }
-        
         setLoading(false)
       }
     )
@@ -51,34 +38,14 @@ export const AuthProvider = ({ children }) => {
     return () => subscription.unsubscribe()
   }, [])
 
-  const fetchProfile = async (userId) => {
-    try {
-      const { data, error } = await supabase
-        .from('profiles')
-        .select('*')
-        .eq('id', userId)
-        .single()
 
-      if (error) {
-        console.error('Error fetching profile:', error)
-        return
-      }
-
-      setProfile(data)
-    } catch (error) {
-      console.error('Error fetching profile:', error)
-    }
-  }
-
-  const signUp = async (email, password, userType = 'artist') => {
+  const signUp = async (email, password) => {
     try {
       const { data, error } = await supabase.auth.signUp({
         email,
         password,
         options: {
-          data: {
-            user_type: userType
-          }
+          emailRedirectTo: `${window.location.origin}/auth/callback`
         }
       })
 
@@ -131,7 +98,7 @@ export const AuthProvider = ({ children }) => {
   const resetPassword = async (email) => {
     try {
       const { data, error } = await supabase.auth.resetPasswordForEmail(email, {
-        redirectTo: `${window.location.origin}/auth/reset-password`
+        redirectTo: `${window.location.origin}/auth/callback?type=recovery`
       })
 
       if (error) throw error
@@ -141,33 +108,14 @@ export const AuthProvider = ({ children }) => {
     }
   }
 
-  const updateProfile = async (updates) => {
-    try {
-      const { data, error } = await supabase
-        .from('profiles')
-        .update(updates)
-        .eq('id', user.id)
-        .select()
-        .single()
-
-      if (error) throw error
-      setProfile(data)
-      return { data, error: null }
-    } catch (error) {
-      return { data: null, error }
-    }
-  }
-
   const value = {
     user,
-    profile,
     loading,
     signUp,
     signIn,
     signInWithGoogle,
     signOut,
-    resetPassword,
-    updateProfile
+    resetPassword
   }
 
   return (

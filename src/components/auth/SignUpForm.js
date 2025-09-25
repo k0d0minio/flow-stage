@@ -7,7 +7,6 @@ import { useRouter } from 'next/navigation'
 export default function SignUpForm() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  const [userType, setUserType] = useState('artist')
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
   const [message, setMessage] = useState('')
@@ -21,7 +20,7 @@ export default function SignUpForm() {
     setError('')
     setMessage('')
 
-    const { data, error } = await signUp(email, password, userType)
+    const { data, error } = await signUp(email, password)
 
     if (error) {
       setError(error.message)
@@ -33,13 +32,19 @@ export default function SignUpForm() {
   }
 
   return (
-    <div className="max-w-md mx-auto mt-8 p-6 bg-white rounded-lg shadow-md">
-      <h2 className="text-2xl font-bold text-center mb-6">Sign Up</h2>
+    <div className="card-elevated p-8 animate-fade-in">
+      <div className="text-center mb-8">
+        <div className="w-16 h-16 bg-gradient-to-br from-secondary-500 to-secondary-600 rounded-2xl flex items-center justify-center mx-auto mb-4">
+          <span className="text-2xl">🚀</span>
+        </div>
+        <h2 className="text-3xl font-bold text-gray-900 mb-2">Join Flow Stage</h2>
+        <p className="text-gray-600">Start your musical journey today</p>
+      </div>
       
-      <form onSubmit={handleSubmit} className="space-y-4">
+      <form onSubmit={handleSubmit} className="space-y-6">
         <div>
-          <label htmlFor="email" className="block text-sm font-medium text-gray-700">
-            Email
+          <label htmlFor="email" className="form-label">
+            Email Address
           </label>
           <input
             id="email"
@@ -47,12 +52,13 @@ export default function SignUpForm() {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
-            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+            placeholder="Enter your email"
+            className="form-input"
           />
         </div>
 
         <div>
-          <label htmlFor="password" className="block text-sm font-medium text-gray-700">
+          <label htmlFor="password" className="form-label">
             Password
           </label>
           <input
@@ -62,34 +68,20 @@ export default function SignUpForm() {
             onChange={(e) => setPassword(e.target.value)}
             required
             minLength={6}
-            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+            placeholder="Create a password (min. 6 characters)"
+            className="form-input"
           />
         </div>
 
-        <div>
-          <label htmlFor="userType" className="block text-sm font-medium text-gray-700">
-            I am a...
-          </label>
-          <select
-            id="userType"
-            value={userType}
-            onChange={(e) => setUserType(e.target.value)}
-            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
-          >
-            <option value="artist">🎵 Artist</option>
-            <option value="venue">🏢 Venue</option>
-            <option value="booker">📋 Booker</option>
-          </select>
-        </div>
 
         {error && (
-          <div className="text-red-600 text-sm bg-red-50 p-3 rounded-md">
+          <div className="form-error">
             {error}
           </div>
         )}
 
         {message && (
-          <div className="text-green-600 text-sm bg-green-50 p-3 rounded-md">
+          <div className="form-success">
             {message}
           </div>
         )}
@@ -97,16 +89,23 @@ export default function SignUpForm() {
         <button
           type="submit"
           disabled={loading}
-          className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50"
+          className="btn-primary w-full"
         >
-          {loading ? 'Signing up...' : 'Sign Up'}
+          {loading ? (
+            <div className="flex items-center justify-center">
+              <div className="spinner w-5 h-5 mr-2"></div>
+              Creating account...
+            </div>
+          ) : (
+            'Create Account'
+          )}
         </button>
       </form>
 
-      <div className="mt-6 text-center">
+      <div className="mt-8 text-center">
         <p className="text-sm text-gray-600">
           Already have an account?{' '}
-          <a href="/auth/signin" className="font-medium text-blue-600 hover:text-blue-500">
+          <a href="/auth/signin" className="font-semibold text-primary-600 hover:text-primary-700 transition-colors">
             Sign in
           </a>
         </p>

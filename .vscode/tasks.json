@@ -1,0 +1,340 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "🚀 Deploy to Production",
+      "type": "shell",
+      "command": "vercel",
+      "args": ["--prod"],
+      "group": "build",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared",
+        "showReuseMessage": true,
+        "clear": false
+      },
+      "problemMatcher": [],
+      "detail": "Deploy the current project to Vercel production"
+    },
+    {
+      "label": "🔍 View Deployment Logs (Interactive)",
+      "type": "shell",
+      "command": "bash",
+      "args": [
+        "-c",
+        "echo 'Available deployments:'; vercel ls; echo ''; echo 'To view logs, copy a deployment URL and run:'; echo 'vercel logs <DEPLOYMENT_URL>'; echo ''; echo 'Example: vercel logs https://flow-stage-abc123.vercel.app'; echo ''; echo 'Press any key to close...'; read -n 1"
+      ],
+      "group": "test",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": true,
+        "panel": "shared",
+        "showReuseMessage": true,
+        "clear": false
+      },
+      "problemMatcher": [],
+      "detail": "Shows deployments and instructions for viewing logs"
+    },
+    {
+      "label": "📋 List Deployments",
+      "type": "shell",
+      "command": "vercel",
+      "args": ["ls"],
+      "group": "test",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared",
+        "showReuseMessage": true,
+        "clear": false
+      },
+      "problemMatcher": [],
+      "detail": "List all deployments for the project"
+    },
+    {
+      "label": "🌐 List Environment Variables",
+      "type": "shell",
+      "command": "vercel",
+      "args": ["env", "ls"],
+      "group": "test",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared",
+        "showReuseMessage": true,
+        "clear": false
+      },
+      "problemMatcher": [],
+      "detail": "List all environment variables configured in Vercel"
+    },
+    {
+      "label": "➕ Add Environment Variable",
+      "type": "shell",
+      "command": "vercel",
+      "args": ["env", "add"],
+      "group": "build",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": true,
+        "panel": "shared",
+        "showReuseMessage": true,
+        "clear": false
+      },
+      "problemMatcher": [],
+      "detail": "Add a new environment variable (interactive prompt)"
+    },
+    {
+      "label": "🔗 Pull Environment Variables",
+      "type": "shell",
+      "command": "vercel",
+      "args": ["env", "pull", ".env.local"],
+      "group": "build",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared",
+        "showReuseMessage": true,
+        "clear": false
+      },
+      "problemMatcher": [],
+      "detail": "Pull environment variables from Vercel to .env.local"
+    },
+    {
+      "label": "🏗️ Deploy Database Schema",
+      "type": "shell",
+      "command": "supabase",
+      "args": ["db", "push"],
+      "group": "build",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared",
+        "showReuseMessage": true,
+        "clear": false
+      },
+      "problemMatcher": [],
+      "detail": "Deploy database schema changes to Supabase"
+    },
+    {
+      "label": "🔄 Reset Database",
+      "type": "shell",
+      "command": "supabase",
+      "args": ["db", "reset"],
+      "group": "build",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared",
+        "showReuseMessage": true,
+        "clear": false
+      },
+      "problemMatcher": [],
+      "detail": "Reset the local database and apply migrations"
+    },
+    {
+      "label": "📊 Generate TypeScript Types",
+      "type": "shell",
+      "command": "supabase",
+      "args": ["gen", "types", "typescript", "--local"],
+      "group": "build",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared",
+        "showReuseMessage": true,
+        "clear": false
+      },
+      "problemMatcher": [],
+      "detail": "Generate TypeScript types from local database schema"
+    },
+    {
+      "label": "🚀 Start Local Supabase",
+      "type": "shell",
+      "command": "supabase",
+      "args": ["start"],
+      "group": "build",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared",
+        "showReuseMessage": true,
+        "clear": false
+      },
+      "problemMatcher": [],
+      "detail": "Start local Supabase development environment"
+    },
+    {
+      "label": "⏹️ Stop Local Supabase",
+      "type": "shell",
+      "command": "supabase",
+      "args": ["stop"],
+      "group": "build",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared",
+        "showReuseMessage": true,
+        "clear": false
+      },
+      "problemMatcher": [],
+      "detail": "Stop local Supabase development environment"
+    },
+    {
+      "label": "📋 List Supabase Projects",
+      "type": "shell",
+      "command": "supabase",
+      "args": ["projects", "list"],
+      "group": "test",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared",
+        "showReuseMessage": true,
+        "clear": false
+      },
+      "problemMatcher": [],
+      "detail": "List all Supabase projects in your account"
+    },
+    {
+      "label": "🔍 Check Supabase Status",
+      "type": "shell",
+      "command": "supabase",
+      "args": ["status"],
+      "group": "test",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared",
+        "showReuseMessage": true,
+        "clear": false
+      },
+      "problemMatcher": [],
+      "detail": "Check the status of local Supabase services"
+    },
+    {
+      "label": "🎯 Open Supabase Studio",
+      "type": "shell",
+      "command": "open",
+      "args": ["http://localhost:54323"],
+      "group": "test",
+      "presentation": {
+        "echo": true,
+        "reveal": "never",
+        "focus": false,
+        "panel": "shared",
+        "showReuseMessage": true,
+        "clear": false
+      },
+      "problemMatcher": [],
+      "detail": "Open Supabase Studio in browser (requires local Supabase to be running)"
+    },
+    {
+      "label": "🌐 Open Production Site",
+      "type": "shell",
+      "command": "open",
+      "args": ["https://flow-stage.vercel.app"],
+      "group": "test",
+      "presentation": {
+        "echo": true,
+        "reveal": "never",
+        "focus": false,
+        "panel": "shared",
+        "showReuseMessage": true,
+        "clear": false
+      },
+      "problemMatcher": [],
+      "detail": "Open the production Flow Stage site in browser"
+    },
+    {
+      "label": "🔧 Full Development Setup",
+      "dependsOrder": "sequence",
+      "dependsOn": [
+        "🚀 Start Local Supabase",
+        "🔗 Pull Environment Variables"
+      ],
+      "group": "build",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared",
+        "showReuseMessage": true,
+        "clear": false
+      },
+      "problemMatcher": [],
+      "detail": "Complete development setup: start Supabase + pull env vars"
+    },
+    {
+      "label": "🚀 Full Production Deploy",
+      "dependsOrder": "sequence",
+      "dependsOn": [
+        "🏗️ Deploy Database Schema",
+        "🚀 Deploy to Production"
+      ],
+      "group": "build",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared",
+        "showReuseMessage": true,
+        "clear": false
+      },
+      "problemMatcher": [],
+      "detail": "Complete production deployment: deploy schema + deploy code"
+    },
+    {
+      "label": "🧹 Clean Development Environment",
+      "dependsOrder": "sequence",
+      "dependsOn": [
+        "⏹️ Stop Local Supabase",
+        "🔄 Reset Database"
+      ],
+      "group": "build",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared",
+        "showReuseMessage": true,
+        "clear": false
+      },
+      "problemMatcher": [],
+      "detail": "Clean development environment: stop Supabase + reset database"
+    },
+    {
+      "label": "📊 Project Status Check",
+      "dependsOrder": "parallel",
+      "dependsOn": [
+        "📋 List Deployments",
+        "📋 List Supabase Projects",
+        "🔍 Check Supabase Status"
+      ],
+      "group": "test",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared",
+        "showReuseMessage": true,
+        "clear": false
+      },
+      "problemMatcher": [],
+      "detail": "Check overall project status: deployments, Supabase projects, and local status"
+    }
+  ]
+}

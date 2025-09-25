@@ -25,7 +25,8 @@
       "neverMarkCompleteWithoutVerification": "User must confirm functionality works before marking tickets as completed",
       "alwaysTestImplementation": "Test all implementations before claiming completion",
       "alwaysCheckESLintErrors": "Always run linting checks before marking work complete - avoid unescaped entities and other common ESLint errors",
-      "preventCommonErrors": "Avoid apostrophes in JSX text, use proper escaping or &apos; entity"
+      "preventCommonErrors": "Avoid apostrophes in JSX text, use proper escaping or &apos; entity",
+      "useDockerForTesting": "Always use Docker commands for testing to isolate dev environment from user's machine. Use npm run docker:dev, npm run docker:logs, npm run docker:shell commands. App available at https://flow-stage.localtest.me"
     }
   },
   "insights": {

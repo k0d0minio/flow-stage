@@ -119,6 +119,12 @@ Creating `.cursor/learning-patterns.json`...
 - Monitor sprint velocity trends
 - Analyze team capacity vs workload
 - Track learning system evolution
+- Validate project scope using `.cursor/project.json`
+
+**Project-Scoped Operations:**
+- All Linear API calls MUST use `project: "{linear.projectId}"` from `.cursor/project.json`
+- Validate `linear.teamId` and `linear.projectId` exist before any Linear operations
+- Use `linear.projectName` for context in all project-related communications
 
 **Learning-Enhanced Suggestions:**
 - "🎯 Pattern: You approve 92% of auth tickets - suggest K0D-156?"
@@ -149,10 +155,15 @@ Use learning data for intelligent risk detection:
 ## Project Intelligence Commands
 
 - `setup project` - Initialize configuration files
-- `project status` - Health dashboard with learning insights
+- `project status` - Health dashboard with learning insights (project-scoped)
 - `my patterns` - Show learned preferences and trends
 - `reset learning` - Clear learning data and restart
-- `sync project` - Refresh Linear data and update milestones
+- `sync project` - Refresh Linear data and update milestones (project-scoped)
+
+**Command Implementation Notes:**
+- `project status` MUST use `mcp_linear_list_issues` with `project: "{linear.projectId}"`
+- `sync project` MUST filter all Linear operations to current project scope
+- All commands should validate `.cursor/project.json` exists and contains required fields
 
 ## Learning Data Updates
 
@@ -175,6 +186,8 @@ Use learning data for intelligent risk detection:
 - Missing files → Auto-create with prompts
 - Malformed JSON → Backup and recreate
 - Invalid Linear data → Request user correction
+- Missing `linear.projectId` → Cannot proceed with Linear operations
+- Missing `linear.teamId` → Cannot proceed with team-specific operations
 
 **API Failures:**
 - Linear unavailable → Use cached data, warn user
