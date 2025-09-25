@@ -62,49 +62,14 @@ function CallbackContent() {
             router.push('/auth/auth-code-error')
           }
         } 
-        // Handle PKCE flow with authorization code
+        // Handle email confirmation flow with authorization code
         else if (code) {
-          console.log('🔍 PKCE flow detected')
-          
-          // Get the stored code verifier from localStorage or cookies
-          const getCookie = (name) => {
-            const value = `; ${document.cookie}`
-            const parts = value.split(`; ${name}=`)
-            if (parts.length === 2) return parts.pop().split(';').shift()
-            return null
-          }
-          
-          // Try localStorage first (more reliable)
-          let codeVerifier = localStorage.getItem('sb-code-verifier')
-          
-          // Fallback to cookies if localStorage doesn't have it
-          if (!codeVerifier) {
-            codeVerifier = getCookie('sb-code-verifier')
-          }
-          
-          if (!codeVerifier) {
-            console.error('❌ No code verifier found in localStorage or cookies')
-            router.push('/auth/auth-code-error')
-            return
-          }
-          
-          console.log('🔍 Found code verifier:', !!codeVerifier)
+          console.log('🔍 Email confirmation flow detected')
           console.log('🔍 Code value:', code)
-          console.log('🔍 Code verifier value:', codeVerifier)
           console.log('🔍 Code length:', code?.length)
-          console.log('🔍 Code verifier length:', codeVerifier?.length)
           
-          // Validate both code and code verifier are non-empty
-          if (!code || !codeVerifier) {
-            console.error('❌ Missing required parameters:', { 
-              hasCode: !!code, 
-              hasCodeVerifier: !!codeVerifier 
-            })
-            router.push('/auth/auth-code-error')
-            return
-          }
-          
-          const { data, error } = await supabase.auth.exchangeCodeForSession(code, codeVerifier)
+          // For email confirmation, we don't need PKCE - just exchange the code
+          const { data, error } = await supabase.auth.exchangeCodeForSession(code)
           
           if (error) {
             console.error('❌ Error exchanging code:', error)
@@ -113,10 +78,6 @@ function CallbackContent() {
           }
 
           console.log('✅ Code exchanged successfully:', data.user?.id)
-          
-          // Clear the code verifier from both localStorage and cookies
-          localStorage.removeItem('sb-code-verifier')
-          document.cookie = 'sb-code-verifier=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT'
 
           // Redirect based on type
           if (type === 'signup') {
