@@ -68,16 +68,19 @@ function CallbackContent() {
           console.log('🔍 Code value:', code)
           console.log('🔍 Code length:', code?.length)
           
-          // For email confirmation, we don't need PKCE - just exchange the code
-          const { data, error } = await supabase.auth.exchangeCodeForSession(code)
+          // For email confirmation, use verifyOtp instead of exchangeCodeForSession
+          const { data, error } = await supabase.auth.verifyOtp({
+            token_hash: code,
+            type: 'email'
+          })
           
           if (error) {
-            console.error('❌ Error exchanging code:', error)
+            console.error('❌ Error verifying OTP:', error)
             router.push('/auth/auth-code-error')
             return
           }
 
-          console.log('✅ Code exchanged successfully:', data.user?.id)
+          console.log('✅ Email verified successfully:', data.user?.id)
 
           // Redirect based on type
           if (type === 'signup') {
