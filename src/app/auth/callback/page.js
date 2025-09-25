@@ -13,10 +13,12 @@ function CallbackContent() {
       try {
         const type = searchParams.get('type') || 'signup'
         const code = searchParams.get('code')
+        const token = searchParams.get('token')
         
         console.log('🔍 Callback page handling:', { 
           type, 
           hasCode: !!code,
+          hasToken: !!token,
           url: window.location.href
         })
 
@@ -62,16 +64,17 @@ function CallbackContent() {
             router.push('/auth/auth-code-error')
           }
         } 
-        // Handle email confirmation flow with authorization code
-        else if (code) {
+        // Handle email confirmation flow with token
+        else if (token) {
           console.log('🔍 Email confirmation flow detected')
-          console.log('🔍 Code value:', code)
-          console.log('🔍 Code length:', code?.length)
+          console.log('🔍 Token value:', token)
+          console.log('🔍 Token length:', token?.length)
+          console.log('🔍 Type:', type)
           
-          // For email confirmation, use verifyOtp instead of exchangeCodeForSession
+          // For email confirmation, use verifyOtp with token and type
           const { data, error } = await supabase.auth.verifyOtp({
-            token_hash: code,
-            type: 'email'
+            token: token,
+            type: type
           })
           
           if (error) {
@@ -81,6 +84,32 @@ function CallbackContent() {
           }
 
           console.log('✅ Email verified successfully:', data.user?.id)
+
+          // Redirect based on type
+          if (type === 'signup') {
+            router.push('/auth/account-confirmed')
+          } else if (type === 'recovery') {
+            router.push('/auth/profile-setup')
+          } else {
+            router.push('/dashboard')
+          }
+        }
+        // Handle PKCE flow with authorization code (fallback)
+        else if (code) {
+          console.log('🔍 PKCE flow detected (fallback)')
+          console.log('🔍 Code value:', code)
+          console.log('🔍 Code length:', code?.length)
+          
+          // For PKCE flow, use exchangeCodeForSession
+          const { data, error } = await supabase.auth.exchangeCodeForSession(code)
+          
+          if (error) {
+            console.error('❌ Error exchanging code:', error)
+            router.push('/auth/auth-code-error')
+            return
+          }
+
+          console.log('✅ Code exchanged successfully:', data.user?.id)
 
           // Redirect based on type
           if (type === 'signup') {
