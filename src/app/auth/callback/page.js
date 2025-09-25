@@ -14,11 +14,13 @@ function CallbackContent() {
         const type = searchParams.get('type') || 'signup'
         const code = searchParams.get('code')
         const token = searchParams.get('token')
+        const token_hash = searchParams.get('token_hash')
         
         console.log('🔍 Callback page handling:', { 
           type, 
           hasCode: !!code,
           hasToken: !!token,
+          hasTokenHash: !!token_hash,
           url: window.location.href
         })
 
@@ -64,9 +66,39 @@ function CallbackContent() {
             router.push('/auth/auth-code-error')
           }
         } 
-        // Handle email confirmation flow with token
+        // Handle PKCE email confirmation flow with token_hash
+        else if (token_hash) {
+          console.log('🔍 PKCE email confirmation flow detected')
+          console.log('🔍 Token hash value:', token_hash)
+          console.log('🔍 Token hash length:', token_hash?.length)
+          console.log('🔍 Type:', type)
+          
+          // For PKCE email confirmation, use verifyOtp with token_hash and type
+          const { data, error } = await supabase.auth.verifyOtp({
+            token_hash: token_hash,
+            type: type
+          })
+          
+          if (error) {
+            console.error('❌ Error verifying OTP:', error)
+            router.push('/auth/auth-code-error')
+            return
+          }
+
+          console.log('✅ Email verified successfully:', data.user?.id)
+
+          // Redirect based on type
+          if (type === 'signup') {
+            router.push('/auth/account-confirmed')
+          } else if (type === 'recovery') {
+            router.push('/auth/profile-setup')
+          } else {
+            router.push('/dashboard')
+          }
+        }
+        // Handle email confirmation flow with token (fallback)
         else if (token) {
-          console.log('🔍 Email confirmation flow detected')
+          console.log('🔍 Email confirmation flow detected (fallback)')
           console.log('🔍 Token value:', token)
           console.log('🔍 Token length:', token?.length)
           console.log('🔍 Type:', type)
@@ -125,15 +157,33 @@ function CallbackContent() {
             return
           }
           
-          // For PKCE flow, use exchangeCodeForSession with code verifier
-          console.log('🔍 About to call exchangeCodeForSession with:', {
+          // Try different approaches for PKCE flow
+          console.log('🔍 About to try PKCE exchange with:', {
             code: code,
             codeVerifier: codeVerifier,
             codeLength: code?.length,
             verifierLength: codeVerifier?.length
           })
           
-          const { data, error } = await supabase.auth.exchangeCodeForSession(code, codeVerifier)
+          // First try: exchangeCodeForSession with code verifier
+          let { data, error } = await supabase.auth.exchangeCodeForSession(code, codeVerifier)
+          
+          // If that fails, try verifyOtp with the code as token
+          if (error && error.message.includes('both auth code and code verifier should be non-empty')) {
+            console.log('🔍 First attempt failed, trying verifyOtp with code as token')
+            const otpResult = await supabase.auth.verifyOtp({
+              token: code,
+              type: type || 'email'
+            })
+            
+            if (!otpResult.error) {
+              data = otpResult.data
+              error = null
+              console.log('✅ Success with verifyOtp approach')
+            } else {
+              console.log('❌ verifyOtp also failed:', otpResult.error)
+            }
+          }
           
           if (error) {
             console.error('❌ Error exchanging code:', error)
