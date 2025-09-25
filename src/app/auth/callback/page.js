@@ -89,6 +89,20 @@ function CallbackContent() {
           }
           
           console.log('🔍 Found code verifier:', !!codeVerifier)
+          console.log('🔍 Code value:', code)
+          console.log('🔍 Code verifier value:', codeVerifier)
+          console.log('🔍 Code length:', code?.length)
+          console.log('🔍 Code verifier length:', codeVerifier?.length)
+          
+          // Validate both code and code verifier are non-empty
+          if (!code || !codeVerifier) {
+            console.error('❌ Missing required parameters:', { 
+              hasCode: !!code, 
+              hasCodeVerifier: !!codeVerifier 
+            })
+            router.push('/auth/auth-code-error')
+            return
+          }
           
           const { data, error } = await supabase.auth.exchangeCodeForSession(code, codeVerifier)
           
