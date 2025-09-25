@@ -66,7 +66,7 @@ function CallbackContent() {
         else if (code) {
           console.log('🔍 PKCE flow detected')
           
-          // Get the stored code verifier from cookies
+          // Get the stored code verifier from localStorage or cookies
           const getCookie = (name) => {
             const value = `; ${document.cookie}`
             const parts = value.split(`; ${name}=`)
@@ -74,10 +74,16 @@ function CallbackContent() {
             return null
           }
           
-          const codeVerifier = getCookie('sb-code-verifier')
+          // Try localStorage first (more reliable)
+          let codeVerifier = localStorage.getItem('sb-code-verifier')
+          
+          // Fallback to cookies if localStorage doesn't have it
+          if (!codeVerifier) {
+            codeVerifier = getCookie('sb-code-verifier')
+          }
           
           if (!codeVerifier) {
-            console.error('❌ No code verifier found in cookies')
+            console.error('❌ No code verifier found in localStorage or cookies')
             router.push('/auth/auth-code-error')
             return
           }
@@ -94,7 +100,8 @@ function CallbackContent() {
 
           console.log('✅ Code exchanged successfully:', data.user?.id)
           
-          // Clear the code verifier cookie
+          // Clear the code verifier from both localStorage and cookies
+          localStorage.removeItem('sb-code-verifier')
           document.cookie = 'sb-code-verifier=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT'
 
           // Redirect based on type

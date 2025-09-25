@@ -38,12 +38,18 @@ export async function generateCodeChallenge(verifier) {
 }
 
 /**
- * Store code verifier in secure cookie
+ * Store code verifier in secure cookie and localStorage as fallback
  */
 export function storeCodeVerifier(verifier) {
-  // Store in a secure cookie (not HTTP-only so client can access it)
-  // In production, you might want to use HTTP-only cookies set by the server
-  document.cookie = `sb-code-verifier=${verifier}; path=/; samesite=strict; max-age=600` // 10 minutes
+  try {
+    // Store in localStorage as primary method (more reliable)
+    localStorage.setItem('sb-code-verifier', verifier)
+    
+    // Also store in cookie as backup (with relaxed samesite for redirects)
+    document.cookie = `sb-code-verifier=${verifier}; path=/; samesite=lax; max-age=600` // 10 minutes
+  } catch (error) {
+    console.warn('Failed to store code verifier:', error)
+  }
 }
 
 /**
