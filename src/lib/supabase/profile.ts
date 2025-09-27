@@ -1,4 +1,4 @@
-import { createClient } from './client'
+import { createClient, createClientWithJWT } from './client'
 import { createAdminClient } from './admin'
 
 export interface Profile {
@@ -47,8 +47,9 @@ export async function createProfile(clerkUser: {
   return data
 }
 
-export async function getProfile(clerkUserId: string): Promise<Profile | null> {
-  const supabase = createClient()
+export async function getProfile(clerkUserId: string, jwtToken?: string): Promise<Profile | null> {
+  // Use JWT client if token provided (for API routes), otherwise use regular client
+  const supabase = jwtToken ? createClientWithJWT(jwtToken) : createClient()
   
   const { data, error } = await supabase
     .from('profiles')
@@ -68,8 +69,9 @@ export async function getProfile(clerkUserId: string): Promise<Profile | null> {
   return data
 }
 
-export async function updateProfile(clerkUserId: string, updates: Partial<Profile>) {
-  const supabase = createAdminClient()
+export async function updateProfile(clerkUserId: string, updates: Partial<Profile>, jwtToken?: string) {
+  // Use JWT client if token provided (for API routes), otherwise use admin client
+  const supabase = jwtToken ? createClientWithJWT(jwtToken) : createAdminClient()
   
   const { data, error } = await supabase
     .from('profiles')
@@ -92,9 +94,9 @@ export async function ensureProfile(clerkUser: {
   firstName?: string | null
   lastName?: string | null
   imageUrl?: string | null
-}): Promise<Profile> {
+}, jwtToken?: string): Promise<Profile> {
   // Try to get existing profile
-  let profile = await getProfile(clerkUser.id)
+  let profile = await getProfile(clerkUser.id, jwtToken)
   
   if (!profile) {
     // Create new profile if it doesn't exist
@@ -106,7 +108,7 @@ export async function ensureProfile(clerkUser: {
       first_name: clerkUser.firstName || undefined,
       last_name: clerkUser.lastName || undefined,
       avatar_url: clerkUser.imageUrl || undefined,
-    })
+    }, jwtToken)
   }
   
   if (!profile) {

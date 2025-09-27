@@ -4,13 +4,19 @@ import { ensureProfile, getProfile } from '@/lib/supabase/profile'
 
 export async function GET() {
   try {
-    const { userId } = await auth()
+    const { userId, getToken } = await auth()
     
     if (!userId) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
     }
 
-    const profile = await getProfile(userId)
+    // Get Clerk JWT token
+    const token = await getToken()
+    if (!token) {
+      return NextResponse.json({ error: 'No token available' }, { status: 401 })
+    }
+
+    const profile = await getProfile(userId, token)
     
     if (!profile) {
       return NextResponse.json({ error: 'Profile not found' }, { status: 404 })
@@ -25,10 +31,16 @@ export async function GET() {
 
 export async function POST() {
   try {
-    const { userId } = await auth()
+    const { userId, getToken } = await auth()
     
     if (!userId) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+    }
+
+    // Get Clerk JWT token
+    const token = await getToken()
+    if (!token) {
+      return NextResponse.json({ error: 'No token available' }, { status: 401 })
     }
 
     // Get user data from Clerk
@@ -44,7 +56,7 @@ export async function POST() {
       firstName: clerkUser.firstName,
       lastName: clerkUser.lastName,
       imageUrl: clerkUser.imageUrl,
-    })
+    }, token)
 
     return NextResponse.json(profile)
   } catch (error) {
