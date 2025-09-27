@@ -13,8 +13,8 @@
   },
   "architecture": {
     "framework": "Next.js",
-    "language": "Javascript", 
-    "database": "PostgreSQL",
+    "language": "TypeScript", 
+    "database": "Supabase",
     "patterns": ["Clean Architecture", "SOLID"]
   },
   "milestones": {
