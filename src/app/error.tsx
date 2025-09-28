@@ -33,7 +33,7 @@ export default function Error({ error }: ErrorProps) {
         createLinearTicket()
       }
     }
-  }, [isDevelopment, error.digest, error.message, error.stack, ticketCreated, isCreatingTicket, createLinearTicket])
+  }, [isDevelopment, error.digest, error.message, error.stack, ticketCreated, isCreatingTicket])
 
   const createLinearTicket = useCallback(async () => {
     setIsCreatingTicket(true)
