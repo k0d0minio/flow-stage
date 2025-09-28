@@ -58,7 +58,7 @@ export async function POST() {
       imageUrl: clerkUser.imageUrl,
     }, token)
 
-    return NextResponse.json(profile)
+    return NextResponse.json(profile, { status: 201 })
   } catch (error) {
     console.error('Error creating/updating profile:', error)
     return NextResponse.json({ error: 'Internal server error' }, { status: 500 })

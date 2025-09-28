@@ -1,7 +1,10 @@
+'use client'
+
 import { SignedIn, SignedOut } from "@clerk/nextjs";
 import { ProfileSection } from "@/components/ProfileSection";
 
 export default function Home() {
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-900 dark:to-gray-800">
       <main className="max-w-6xl mx-auto px-4 py-12">
@@ -95,6 +98,13 @@ export default function Home() {
                 <div>
                   <span className="font-medium text-gray-900 dark:text-white">Responsive Design</span>
                   <p className="text-sm text-gray-500">Mobile-first approach</p>
+                </div>
+              </li>
+              <li className="flex items-start">
+                <span className="text-blue-500 mr-3 mt-1">🔧</span>
+                <div>
+                  <span className="font-medium text-gray-900 dark:text-white">Linear Integration</span>
+                  <p className="text-sm text-gray-500">Auto error reporting</p>
                 </div>
               </li>
             </ul>
