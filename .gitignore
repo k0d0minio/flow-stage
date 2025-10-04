@@ -44,3 +44,6 @@ next-env.d.ts
 /.clerk/
 
 .env.local
+
+# cursor environment configuration
+.cursor/config/environment.local.json

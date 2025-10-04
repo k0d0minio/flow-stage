@@ -2,58 +2,75 @@
   "version": "2.0.0",
   "tasks": [
     {
-      "label": "Development Server",
+      "label": "npm: install",
       "type": "shell",
-      "command": "npm run dev",
-      "args": [],
+      "command": "npm",
+      "args": ["install"],
       "group": "build",
       "presentation": {
         "echo": true,
         "reveal": "always",
-        "focus": true,
-        "panel": "new",
-        "showReuseMessage": false,
-        "clear": false
+        "focus": false,
+        "panel": "shared"
       },
-      "isBackground": true,
-      "problemMatcher": [],
-      "detail": "Start the development server"
+      "problemMatcher": []
     },
     {
-      "label": "Run Test Suite",
+      "label": "npm: dev",
       "type": "shell",
-      "command": "npm run test",
-      "args": [],
+      "command": "npm",
+      "args": ["run", "dev"],
       "group": "build",
       "presentation": {
         "echo": true,
         "reveal": "always",
-        "focus": true,
-        "panel": "new",
-        "showReuseMessage": false,
-        "clear": false
+        "focus": false,
+        "panel": "shared"
       },
-      "isBackground": true,
       "problemMatcher": [],
-      "detail": "Run the test suite"
+      "isBackground": true
     },
     {
-      "label": "Run Test Coverage",
+      "label": "npm: build",
       "type": "shell",
-      "command": "npm run test:coverage",
-      "args": [],
+      "command": "npm",
+      "args": ["run", "build"],
       "group": "build",
       "presentation": {
         "echo": true,
         "reveal": "always",
-        "focus": true,
-        "panel": "new",
-        "showReuseMessage": false,
-        "clear": false
+        "focus": false,
+        "panel": "shared"
       },
-      "isBackground": true,
-      "problemMatcher": [],
-      "detail": "Run the test coverage suite"
+      "problemMatcher": []
+    },
+    {
+      "label": "npm: test",
+      "type": "shell",
+      "command": "npm",
+      "args": ["test"],
+      "group": "test",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "npm: lint",
+      "type": "shell",
+      "command": "npm",
+      "args": ["run", "lint"],
+      "group": "build",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared"
+      },
+      "problemMatcher": []
     }
   ]
 }
