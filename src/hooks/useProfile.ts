@@ -1,77 +1,77 @@
-import { useUser } from '@clerk/nextjs'
-import { useEffect, useState } from 'react'
-import { Profile } from '@/lib/supabase/profile'
+import { useUser } from '@clerk/nextjs';
+import { useEffect, useState } from 'react';
+import { Profile } from '@/lib/supabase/profile';
 
 export function useProfile() {
-  const { user, isLoaded } = useUser()
-  const [profile, setProfile] = useState<Profile | null>(null)
-  const [loading, setLoading] = useState(true)
-  const [error, setError] = useState<string | null>(null)
+  const { user, isLoaded } = useUser();
+  const [profile, setProfile] = useState<Profile | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     if (!isLoaded || !user) {
-      setLoading(false)
-      return
+      setLoading(false);
+      return;
     }
 
     const fetchProfile = async () => {
       try {
-        setLoading(true)
-        setError(null)
-        
-        const response = await fetch('/api/profile')
-        
+        setLoading(true);
+        setError(null);
+
+        const response = await fetch('/api/profile');
+
         if (response.ok) {
-          const profileData = await response.json()
-          setProfile(profileData)
+          const profileData = await response.json();
+          setProfile(profileData);
         } else if (response.status === 404) {
           // Profile doesn't exist, create it
           const createResponse = await fetch('/api/profile', {
             method: 'POST',
-          })
-          
+          });
+
           if (createResponse.ok) {
-            const newProfile = await createResponse.json()
-            setProfile(newProfile)
+            const newProfile = await createResponse.json();
+            setProfile(newProfile);
           } else {
-            throw new Error('Failed to create profile')
+            throw new Error('Failed to create profile');
           }
         } else {
-          throw new Error('Failed to fetch profile')
+          throw new Error('Failed to fetch profile');
         }
       } catch (err) {
-        setError(err instanceof Error ? err.message : 'Unknown error')
+        setError(err instanceof Error ? err.message : 'Unknown error');
       } finally {
-        setLoading(false)
+        setLoading(false);
       }
-    }
+    };
 
-    fetchProfile()
-  }, [isLoaded, user])
+    fetchProfile();
+  }, [isLoaded, user]);
 
   const refreshProfile = async () => {
-    if (!user) return
-    
+    if (!user) return;
+
     try {
-      setLoading(true)
-      setError(null)
-      
+      setLoading(true);
+      setError(null);
+
       const response = await fetch('/api/profile', {
         method: 'POST',
-      })
-      
+      });
+
       if (response.ok) {
-        const profileData = await response.json()
-        setProfile(profileData)
+        const profileData = await response.json();
+        setProfile(profileData);
       } else {
-        throw new Error('Failed to refresh profile')
+        throw new Error('Failed to refresh profile');
       }
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Unknown error')
+      setError(err instanceof Error ? err.message : 'Unknown error');
     } finally {
-      setLoading(false)
+      setLoading(false);
     }
-  }
+  };
 
   return {
     profile,
@@ -80,5 +80,5 @@ export function useProfile() {
     refreshProfile,
     isLoaded,
     user,
-  }
+  };
 }
