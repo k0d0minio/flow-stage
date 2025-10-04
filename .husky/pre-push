@@ -31,8 +31,12 @@ if [ $? -ne 0 ]; then
   exit 1
 fi
 
-# Skip tests for now due to React 19 compatibility issues
-echo "⏭️  Skipping tests (React 19 compatibility issues)"
-echo "💡 Tests will be re-enabled in a future ticket"
+# Run tests
+echo "🧪 Running tests..."
+npm run test:ci
+if [ $? -ne 0 ]; then
+  echo "❌ Tests failed"
+  exit 1
+fi
 
 echo "✅ Pre-push checks passed!"

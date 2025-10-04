@@ -13,6 +13,8 @@ const customJestConfig = {
     // Handle module aliases (this will be automatically configured for you based on your tsconfig.json paths)
     '^@/(.*)$': '<rootDir>/src/$1',
   },
+  // Set NODE_ENV to development for tests
+  setupFiles: ['<rootDir>/jest.env.js'],
 };
 
 // createJestConfig is exported this way to ensure that next/jest can load the Next.js config which is async
